@@ -4,11 +4,11 @@
 
 	<groupId>6d92b3ad-78c1-4cab-bd99-fc90eff84320</groupId>
 	<artifactId>ft-ent-app-api</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.5</version>
 	<packaging>mule-application</packaging>
 
 	<name>ft-ent-app-api</name>
-	<description>Firstrust API Template</description>
+	<description>Firstrust API Template1</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
