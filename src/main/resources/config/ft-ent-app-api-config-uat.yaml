@@ -1,0 +1,8 @@
+json:
+  logger:
+    application:
+      disabledFields: "content"
+      contentFieldsDataMasking: ""
+      
+api:
+  id: ""  # replace with real API Id once added to api manager

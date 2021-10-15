@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd">
+	<flow name="get:\function2:mdt-api-template-config">
+		<json-logger:logger doc:name="Log Start" doc:id="8399d910-df71-407c-873f-ffb298a4c23b" config-ref="JSON_Logger_Config"
+			message="Start" correlationId="#[vars.correlationId default correlationId]" />
+		<json-logger:logger doc:name="Log Before Calling API/Backend" doc:id="1e453a1b-0ac2-414f-8035-1e58cbe0b569"
+			config-ref="JSON_Logger_Config" tracePoint="BEFORE_REQUEST" message="Before Calling API or Backend"
+			correlationId="#[vars.correlationId default correlationId]" priority="DEBUG" />
+		<set-payload value='#[%dw 2.0
+output application/json
+---
+{
+	
+}]' doc:name="MOCK: Backend"
+			doc:id="939239c3-eea3-440b-9f20-495f9faf8eec" />
+		<json-logger:logger doc:name="Log After Calling API/Backend" doc:id="2fff620f-8736-4f3f-9f1d-b41e1e4ae283"
+			config-ref="JSON_Logger_Config" tracePoint="AFTER_REQUEST" message="After Calling API or Backend"
+			correlationId="#[vars.correlationId default correlationId]" priority="DEBUG" />
+		<json-logger:logger doc:name="Log Before Transform" doc:id="84dc67ff-c5a2-44c9-a2c9-625897f9a057"
+			tracePoint="BEFORE_TRANSFORM" message="Before Interpretting response" config-ref="JSON_Logger_Config"
+			correlationId="#[vars.correlationId default correlationId]" priority="DEBUG" />
+		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+			xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd"
+			doc:id="3d71640a-b4c6-490b-8f87-0dc7ba9dde37" doc:name="MOCK: Transform">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json-logger:logger doc:name="Log After Transform" doc:id="69a456b1-7cf7-4117-b3c4-cf989c83dc43"
+			tracePoint="AFTER_TRANSFORM" message="After Interpreting Response" config-ref="JSON_Logger_Config"
+			correlationId="#[vars.correlationId default correlationId]" priority="DEBUG" />
+		<json-logger:logger doc:name="Log End" doc:id="e4f6be51-3307-43f0-9774-a8c7cb147d30" config-ref="JSON_Logger_Config"
+			tracePoint="END" message="End" correlationId="#[vars.correlationId default correlationId]" />
+	</flow>
+</mule>

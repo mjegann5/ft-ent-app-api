@@ -1,0 +1,16 @@
+### DO NOT EDIT project.artifactId and project.version. To be replaced by Maven build ###
+json:
+  logger:
+    application:
+      name: "${project.artifactId}"
+      version: "${project.version}"
+      
+api:
+  name: "${project.artifactId}"
+  version: "${project.version}"
+  basepath: "/api/v1"
+  
+https:
+  host: "0.0.0.0"
+  private:
+    port: "8092"
